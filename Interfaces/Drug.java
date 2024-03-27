@@ -1,4 +1,4 @@
-interface Drug implements Physical {
+interface Drug extends Physical {
     public void injested(Entity e);
     public void injected(Entity e);
     public void inhaled(Entity e);

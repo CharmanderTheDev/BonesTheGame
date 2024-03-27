@@ -1,3 +1,3 @@
-interface Seeing implements Alive{
+interface Seeing extends Alive{
     public int getPerception();
 }

@@ -1,3 +1,3 @@
-interface Avian implements Alive{
+interface Avian extends Alive{
     public int getAltitude();
 }

@@ -1,3 +1,3 @@
-interface Edible implements Physical {
+interface Edible extends Physical {
     public int getNutrients();
 }

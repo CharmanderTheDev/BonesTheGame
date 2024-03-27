@@ -1,8 +1,7 @@
 import java.util.*;
 
-interface Physical implements Part{
-    public int getX();
-    public int getY();
+interface Physical extends Part{
     public int getTemperature();
     public int getWeight();
+    public String inspect(int perception, int range);
 }

@@ -1,5 +1,6 @@
 import java.util.*;
 
-interface Solid implements Physical{
+interface Solid extends Physical{
     public ArrayList<Liquid> getSoakedIn();
+    public int getIntegrity();
 }

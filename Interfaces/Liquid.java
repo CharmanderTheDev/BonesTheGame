@@ -1,4 +1,4 @@
-interface Liquid implements Physical{
+interface Liquid extends Physical{
     public int getViscocity();
     public int getAmount();
 }

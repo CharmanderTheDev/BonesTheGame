@@ -1,1 +1,1 @@
-interface Entity implements Physical {}
+interface Entity extends Physical {}

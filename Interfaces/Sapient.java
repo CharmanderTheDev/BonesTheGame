@@ -1,3 +1,3 @@
-interface Sapient implements Alive{
+interface Sapient extends Alive{
     public int getSanity();
 }

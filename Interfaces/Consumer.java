@@ -1,4 +1,4 @@
-interface Consumer implements Alive{
+interface Consumer extends Alive{
     public int getConsumedRoots();
     public int getConsumedFungi();
     public int getConsumedCarbs();
