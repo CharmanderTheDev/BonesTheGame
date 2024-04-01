@@ -1,6 +1,6 @@
 import java.util.*;
 
-abstract class Effect {
+class Effect {
 
     String name;
     ArrayList<String> keywords;
