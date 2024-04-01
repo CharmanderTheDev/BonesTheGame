@@ -32,6 +32,8 @@ class Player extends Animal {
     }
 
     //TODO: implement tick
-    public void tick(ArrayList<ArrayList<Part>> world){}
+    public void tick(ArrayList<ArrayList<Part>> world) {
+        
+    }
 
 }
