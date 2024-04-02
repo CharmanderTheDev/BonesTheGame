@@ -1,1 +1,0 @@
-interface Carnivorous extends Consumer{}

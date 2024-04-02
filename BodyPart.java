@@ -68,7 +68,7 @@ class BodyPart implements Solid{
     public int getIntegrity(){return(this.integrity);}
 
     //TODO: implement inspection of body parts
-    public String inspect(int perception, int range){
+    public String inspect(int perception){
         return("");
     }
 

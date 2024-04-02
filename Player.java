@@ -27,7 +27,7 @@ class Player extends Animal {
     }
 
     //TODO: implement inspect
-    public String inspect(int perception, int range){
+    public String inspect(int perception){
         return("");
     }
 

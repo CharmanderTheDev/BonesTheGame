@@ -1,6 +1,6 @@
 import java.util.*;
 
-class Animal implements Consumer, Edible {
+abstract class Animal implements Consumer, Edible {
 
     protected BodyPart[] bodyparts;
 
