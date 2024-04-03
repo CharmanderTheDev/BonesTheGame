@@ -13,6 +13,16 @@ abstract class Ground implements Physical, Drawable {
 
     protected ArrayList<Animal> population;
 
+    public Ground(int height, int temperature, int weight, int lifeForce, int warp, int vapors, int sunlight) { 
+        this.height = height;
+        this.temperature = temperature;
+        this.weight = weight;
+        this.lifeForce = lifeForce;
+        this.warp = warp;
+        this.vapors = vapors;
+        this.sunlight = sunlight;
+    }
+
     public int getHeight(){return(this.height);}
     public int getTemperature(){return(this.temperature);}
     public int getWeight(){return(this.weight);}
