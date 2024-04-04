@@ -1,11 +1,6 @@
-import java.util.*;
-
 class Main {
-    public Chunk generateChunk(int[] chunks) {
-        return(null);
-    }
-
-    public static void Main(String[] args){
-        System.out.println(void.class);
+    public static void main(String[] args){
+        System.out.println();
+        System.out.println((new Chunk[10])[0]);
     }
 }
