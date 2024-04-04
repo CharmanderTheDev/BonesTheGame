@@ -11,7 +11,7 @@ public class Dirt extends Ground implements Growable {
         this.fertility = fertility;
     }
 
-    public char drawChar(){return('-');}
+    public char drawChar(){return('#');}
     public Color drawColor(){return(new Color(150, 75, 0));}
 
     public void tick(ArrayList<ArrayList<Part>> world) {
