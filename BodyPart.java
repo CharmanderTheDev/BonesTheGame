@@ -13,13 +13,15 @@ class BodyPart implements Solid{
     private int integrity;
     private ArrayList<Liquid> soakedIn;
 
+    private Animal animal;
 
-    public BodyPart(String name, int moveSpeed, int strength, int perception){
+    public BodyPart(String name, int moveSpeed, int strength, int perception, Animal animal){
         this.name = name;
         this.moveSpeed = moveSpeed;
         this.strength = strength;
         this.perception = perception;
         this.effects = new ArrayList<Effect>();
+        this.animal = animal;
     }
     
     public void effect(Effect effect){
@@ -60,7 +62,7 @@ class BodyPart implements Solid{
     */
 
     //TODO: implement tick
-    public void tick(World world){}
+    public void tick(){}
 
     public int getTemperature(){return(this.temperature);}
     public int getWeight(){return(this.weight);}
@@ -71,5 +73,7 @@ class BodyPart implements Solid{
     public String inspect(int perception){
         return("");
     }
+
+    public Coords getCoords(){return(this.animal.getCoords());}
 
 }

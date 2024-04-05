@@ -19,7 +19,7 @@ abstract class Plant implements Alive {
 
     public void setDirt(Dirt dirt){this.dirt = dirt;}
 
-    public void tick(World world){
+    public void tick(){
 
     }
 

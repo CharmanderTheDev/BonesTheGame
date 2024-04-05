@@ -1,5 +1,3 @@
-import java.util.*;
-
 abstract class Animal implements Consumer, Edible {
 
     protected BodyPart[] bodyparts;
@@ -9,6 +7,7 @@ abstract class Animal implements Consumer, Edible {
     protected int sanity;
     protected int weight;
     protected int temperature;
+    protected Coords coords;
 
     //Carnivorous, Consumer
     protected int consumedCarbs;
@@ -24,8 +23,7 @@ abstract class Animal implements Consumer, Edible {
     protected int fat;
     protected int meat;
 
-    public Animal(int age, int sanity, int weight, int temperature){
-
+    public Animal(int age, int sanity, int weight, int temperature, Coords coords){
         this.bodyparts = new BodyPart[] 
         {
             
@@ -35,6 +33,7 @@ abstract class Animal implements Consumer, Edible {
         this.sanity = sanity;
         this.weight = weight;
         this.temperature = temperature;
+        this.coords = coords;
     }
 
     public int[] getStats() {
@@ -63,6 +62,6 @@ abstract class Animal implements Consumer, Edible {
     public String inspect(int perception){return("");}
 
     //TODO: implement tick
-    public void tick(World world){}
+    public void tick(){}
 
 }

@@ -9,8 +9,6 @@ interface Avian extends Alive{
     public int getAltitude();
 }
 
-interface Carnivorous extends Consumer{}
-
 interface Consumer extends Alive{
     public int[] getConsumedNutrients();
 }
@@ -41,13 +39,14 @@ interface Liquid extends Physical{
 }
 
 interface Part {
-    public void tick(World world);
+    public void tick();
 }
 
 interface Physical extends Part{
     public int getTemperature();
     public int getWeight();
     public String inspect(int perception);
+    public Coords getCoords();
 }
 
 interface Solid extends Physical{
