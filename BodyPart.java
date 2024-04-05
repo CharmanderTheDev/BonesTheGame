@@ -60,7 +60,7 @@ class BodyPart implements Solid{
     */
 
     //TODO: implement tick
-    public void tick(ArrayList<ArrayList<Part>> world){}
+    public void tick(World world){}
 
     public int getTemperature(){return(this.temperature);}
     public int getWeight(){return(this.weight);}

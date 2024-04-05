@@ -1,16 +1,16 @@
-import java.util.*;
-
 abstract class Plant implements Alive {
     
     protected int age;
     protected int weight;
     protected int temperature;
+    protected Drug drug;
     Dirt dirt;
 
-    public Plant(int age, int weight, int temperature){
+    public Plant(int age, int weight, int temperature, Drug drug){
         this.age = age;
         this.weight = weight;
         this.temperature = temperature;
+        this.drug = drug;
     }
 
     public int getAge(){return(this.age);}
@@ -19,7 +19,7 @@ abstract class Plant implements Alive {
 
     public void setDirt(Dirt dirt){this.dirt = dirt;}
 
-    public void tick(ArrayList<ArrayList<Part>> world){
+    public void tick(World world){
 
     }
 

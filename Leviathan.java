@@ -1,15 +1,12 @@
 public abstract class Leviathan {
     
-    private int x;
-    private int y;
+    private Coords coords;
 
-    public Leviathan(int x, int y){
-        this.x = x;
-        this.y = y;
+    public Leviathan(Coords coords){
+        this.coords = coords;
     }
 
-    public int getX(){return(this.x);}
-    public int getY(){return(this.y);}
+    public Coords getCoords(){return(this.coords);}
 
     public abstract void affect();
 }

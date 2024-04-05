@@ -41,7 +41,7 @@ interface Liquid extends Physical{
 }
 
 interface Part {
-    public void tick(ArrayList<ArrayList<Part>> world);
+    public void tick(World world);
 }
 
 interface Physical extends Part{

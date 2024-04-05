@@ -60,9 +60,9 @@ abstract class Animal implements Consumer, Edible {
     public int[] getNutrients(){return(new int[] {this.carbs,this.fungi,this.roots,this.fat,this.meat});}
 
     //TODO: implement inspect
-    public String inspect(int perception, int range){return("");}
+    public String inspect(int perception){return("");}
 
     //TODO: implement tick
-    public void tick(ArrayList<ArrayList<Part>> world){}
+    public void tick(World world){}
 
 }
