@@ -27,7 +27,9 @@ public class World {
         return(abs(coords.getX()-reference.getX())<=52&&abs(coords.getY()-reference.getY())<=52);
     }
 
-    public static void transfer(Physical object, Coords newCoords){
+    public static void transfer(Moveable object, Coords newCoords){
+        //TODO: make it move around the player
+        
         //if it's not moving within the current world, it has to bring a hardsaved chunk into memory to add it.
         if(inCurrentWorld(object.getCoords())){
             World.getSpot(newCoords).addObject(
@@ -35,6 +37,7 @@ public class World {
                 its existing spot and preps the object for addition to its new position*/
                 World.getSpot(object.getCoords()).removeObject(object)
             );
+            object.setCoords(newCoords);
         }
     }
 

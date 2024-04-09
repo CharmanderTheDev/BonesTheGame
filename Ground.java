@@ -12,6 +12,8 @@ abstract class Ground implements Physical, Drawable {
     protected int sunlight;
 
     protected ArrayList<Physical> population;
+    protected ArrayList<Physical> markedForRemoval;
+    protected ArrayList<Physical> markedForAddition;
 
     protected Coords coords;
     protected Chunk chunk;
@@ -24,7 +26,11 @@ abstract class Ground implements Physical, Drawable {
         this.warp = warp;
         this.vapors = vapors;
         this.sunlight = sunlight;
+
         this.population = new ArrayList<Physical>();
+        this.markedForRemoval = new ArrayList<Physical>();
+        this.markedForAddition = new ArrayList<Physical>();
+
         this.coords = coords;
         this.chunk = chunk;
     }
@@ -40,20 +46,31 @@ abstract class Ground implements Physical, Drawable {
     
     public Coords getCoords(){return(this.coords);}
 
-    public ArrayList<Physical> getPopulation(){return(this.population);}
+    public ArrayList<Physical> getPopulation(boolean includeFlagged){
+        if(includeFlagged){return(this.population);}
+        else{
+            ArrayList<Physical> cleanPopulation = this.population;
+            for(Physical object: this.markedForRemoval){cleanPopulation.remove(object);}
+            return(cleanPopulation);
+        }
+    }
 
-    public void addObject(Physical object){this.population.add(object);}
+    public void addObject(Physical object){this.markedForAddition.add(object);}
+    public Physical removeObject(Physical object){this.markedForRemoval.add(object);return(object);}
+    private void clearFlagged(){
+        for(Physical object: this.markedForRemoval){this.population.remove(object);}
+        for(Physical object: this.markedForAddition){this.population.add(object);}
+    }
 
-    public Physical removeObject(Physical object){this.population.remove(object);return(object);}
-
-    public void transfer(Physical object, Coords newCoords){this.chunk.transfer(object, newCoords);}
+    public void transfer(Moveable object, Coords newCoords){this.chunk.transfer(object, newCoords);}
 
     public void tick(){
-        for(Physical object: population){object.tick();}
+        for(Physical object: this.population){object.tick();}
+        this.clearFlagged();
     }
 
     public char drawChar(){
-        for(Physical object: population){
+        for(Physical object: this.population){
             if(object instanceof Player){
                 return(((Drawable) object).drawChar());
             }

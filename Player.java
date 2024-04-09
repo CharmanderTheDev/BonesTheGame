@@ -36,8 +36,6 @@ class Player extends Animal implements Drawable{
         World.getSpot(this.coords).transfer(this, new Coords(this.coords.getX(),this.coords.getY()+1));
     }
 
-    public Coords getCoords(){return(this.coords);}
-
     public char drawChar(){return('@');}
     public Color drawColor(){return(new Color(255,0,0));}
 }

@@ -20,7 +20,7 @@ public class Chunk {
 
     public Ground getSpot(Coords coords){return(this.ground[coords.getX()][coords.getY()]);}
 
-    public void transfer(Physical object, Coords newCoords){World.transfer(object, newCoords);}
+    public void transfer(Moveable object, Coords newCoords){World.transfer(object, newCoords);}
 
     public void tick(){
         for(int i=0;i<15;i++){
