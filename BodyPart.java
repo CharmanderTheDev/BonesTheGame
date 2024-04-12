@@ -2,17 +2,22 @@ import java.util.*;
 
 class BodyPart implements Solid{
     
-    public String name;
-    private int moveSpeed;
-    private int strength;
-    private int perception;
+    //Variables needed for this class specifically
+        public String name;
+        private int moveSpeed;
+        private int strength;
+        private int perception;
+        private ArrayList<Effect> effects;
 
-    private ArrayList<Effect> effects;
-    private int temperature;
-    private int weight;
-    private int integrity;
-    private ArrayList<Liquid> soakedIn;
+    //Variables mandated by interfaces
+        private int temperature;
+        private int weight;
+        private int integrity;
+        private ArrayList<Liquid> soakedIn;
 
+    /**
+     * the animal to which this BodyPart belongs.
+     */
     private Animal animal;
 
     public BodyPart(String name, int moveSpeed, int strength, int perception, Animal animal){
@@ -24,10 +29,20 @@ class BodyPart implements Solid{
         this.animal = animal;
     }
     
+    
+    /** 
+     * adds effect to the bodypart
+     * @param effect the effect to add to the bodypart
+     */
     public void effect(Effect effect){
         this.effects.add(effect);
     }
 
+
+    /** 
+     * removes effects based on matching keywords
+     * @param keywords the list of healing keywords
+     */
     public void heal(ArrayList<String> keywords) {
         effectLoop:
         for(Effect effect: effects) {
@@ -40,6 +55,11 @@ class BodyPart implements Solid{
         }
     }
 
+    
+    /** 
+     * applies effects to stats and returns the resulting "effective stats"
+     * @return int[] the stats of this bodypart when considering effects
+     */
     public int[] getStats(){
         int effectiveMoveSpeed = this.moveSpeed;
         int effectiveStrength = this.strength;
@@ -53,6 +73,7 @@ class BodyPart implements Solid{
 
         return(new int[] {effectiveMoveSpeed, effectiveStrength, effectivePerception});
     }
+    
     /*
     Body parts modify in 3 ways: moveSpeed, strength, perception.
     this function should return these 3, taking into account it's own injuries. 
@@ -70,10 +91,13 @@ class BodyPart implements Solid{
     public int getIntegrity(){return(this.integrity);}
 
     //TODO: implement inspection of body parts
-    public String inspect(int perception){
-        return("");
+    public String[] inspect(int perception){
+        return(new String[] {});
     }
 
+    /**
+     * @return the coordinates of the animal to which this bodypart belongs.
+     */
     public Coords getCoords(){return(this.animal.getCoords());}
 
 }

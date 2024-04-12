@@ -11,11 +11,20 @@ public class Stone extends Ground{
     public char drawChar(){return('#');}
     public Color drawColor(){return(new Color(150, 75, 0));}
 
+    
+    /** 
+     * @param world
+     */
     public void tick(World world) {
 
     }
 
-    public String inspect(int perception) {
-        return("");
+    
+    /** 
+     * @param perception
+     * @return String[]
+     */
+    public String[] inspect(int perception) {
+        return(new String[] {});
     }
 }

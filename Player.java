@@ -9,8 +9,8 @@ class Player extends Animal implements Drawable{
     private BodyPart heart; private BodyPart rEye;
     private BodyPart lEye; private BodyPart head;
 
-    public Player(int age, int sanity, int weight, int temperature, Coords coords){
-        super(age, sanity, weight, temperature, coords);
+    public Player(int age, int sanity, int weight, int temperature, Coords coords, Ground ground){
+        super(age, sanity, weight, temperature, coords, ground);
         
         this.rLeg = new BodyPart("right leg", 500, 0, 0, this); this.lLeg = new BodyPart("left leg", 500, 0, 0, this); 
         this.rArm = new BodyPart("right arm", 0, 500, 0, this); this.lArm = new BodyPart("left arm", 0, 500, 0, this);
@@ -27,13 +27,13 @@ class Player extends Animal implements Drawable{
     }
 
     //TODO: implement inspect
-    public String inspect(int perception){
-        return("");
+    public String[] inspect(int perception){
+        return(new String[] {});
     }
 
     //TODO: implement tick
     public void tick() {
-        World.getSpot(this.coords).transfer(this, new Coords(this.coords.getX(),this.coords.getY()+1));
+        this.transfer(new Coords(this.coords.getX(), this.coords.getY()+1));
     }
 
     public char drawChar(){return('@');}

@@ -5,7 +5,7 @@ import java.io.InputStreamReader;
 class Main {
     public static void main(String[] args){
         World.generateAll();
-        World.getSpot(new Coords (0, 0)).addObject(new Player(0,0,0,0,new Coords(0,0)));
+        World.getSpot(new Coords (0, 0)).addObject(new Player(0,0,0,0,new Coords(0,0),World.getSpot(new Coords(0,0))));
         while(true){
             //displaying
             for(int i=0;i<15;i++){

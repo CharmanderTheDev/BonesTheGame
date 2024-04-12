@@ -46,6 +46,11 @@ abstract class Ground implements Physical, Drawable {
     
     public Coords getCoords(){return(this.coords);}
 
+    
+    /** 
+     * @param includeFlagged whether or not to include objects that are flagged for deletion
+     * @return the population of this Ground object
+     */
     public ArrayList<Physical> getPopulation(boolean includeFlagged){
         if(includeFlagged){return(this.population);}
         else{
@@ -55,20 +60,42 @@ abstract class Ground implements Physical, Drawable {
         }
     }
 
+    /**
+     * marks object for addition at the end of a tick
+     * @param object object to be added
+     */
     public void addObject(Physical object){this.markedForAddition.add(object);}
+
+    /**
+     * marks object for deletion at the end of a tick
+     * @param object object to be removed
+     * @return the object that was passed in
+     */
     public Physical removeObject(Physical object){this.markedForRemoval.add(object);return(object);}
-    private void clearFlagged(){
-        for(Physical object: this.markedForRemoval){this.population.remove(object);}
-        for(Physical object: this.markedForAddition){this.population.add(object);}
+
+    /**
+     * clears the flagged lists, adding and removing objects. this prevents
+     * concurrent modification errors by ensuring that all additions and removals
+     * from the population happen AFTER the tick
+     */
+    public void clearFlagged(){
+        for(Physical object: this.markedForRemoval){this.population.remove(object);}this.markedForRemoval.clear();
+        for(Physical object: this.markedForAddition){this.population.add(object);}this.markedForAddition.clear();
     }
 
-    public void transfer(Moveable object, Coords newCoords){this.chunk.transfer(object, newCoords);}
+    public void transfer(Moveable object, Coords newCoords){World.transfer(object, newCoords);this.removeObject(object);}
 
     public void tick(){
         for(Physical object: this.population){object.tick();}
-        this.clearFlagged();
     }
-
+    
+    /** 
+     * draws entities & objects within this ground object based on a hierarchy as follows
+     * Player > Animal > Plant > everything else
+     * if there's nothing, it returns the null character, allowing its child (stone, dirt, etc)
+     * to draw its own character
+     * @return the character to be drawn
+     */
     public char drawChar(){
         for(Physical object: this.population){
             if(object instanceof Player){

@@ -8,7 +8,11 @@ public class Coords {
         this.y = y;
     }
 
-    //converts a chunk and the relative coordinates within the chunk into fullcoords
+    /**
+     * create a new Coords object from the coordinates of a chunk, and coordinates within that chunk
+     * @param chunk chunk in which chunkpos is in
+     * @param chunkpos coordinates within param chunk
+     */
     public Coords(Coords chunk, Coords chunkpos){
         this.x = (chunk.getX()*15)+chunkpos.getX();
         this.y = (chunk.getY()*15)+chunkpos.getY();
@@ -30,10 +34,17 @@ public class Coords {
         this.y = y;
     }
 
+    /**
+     * @return the chunk of a coordinates object
+     */
     public Coords getChunk(){
         return(new Coords(this.x/15, this.y/15));
     }
 
+    /**
+     * @param coords the coordinates to compare with
+     * @return a boolean stating if the two coordinate objects are equal
+     */
     public boolean equals(Coords coords){
         return((coords.getX()==this.getX())&&(coords.getY()==this.getY()));
     }

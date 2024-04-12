@@ -17,13 +17,13 @@ abstract class Plant implements Alive {
     public int getWeight(){return(this.weight);}
     public int getTemperature(){return(this.temperature);}
 
-    public void setDirt(Dirt dirt){this.dirt = dirt;}
+    public void transfer(){}
 
     public void tick(){
 
     }
 
-    public String inspect(int perception){
-        return("");
+    public String[] inspect(int perception){
+        return(new String[] {});
     }
 }

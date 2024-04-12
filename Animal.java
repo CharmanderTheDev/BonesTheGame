@@ -3,12 +3,13 @@ abstract class Animal implements Consumer, Edible, Moveable {
     protected BodyPart[] bodyparts;
 
     //Variables mandated by...
-        //Alive, Sapient, Physical
+        //Alive, Sapient, Physical, Moveable
         protected int age;
         protected int sanity;
         protected int weight;
         protected int temperature;
         protected Coords coords;
+        protected Ground ground;
 
         //Consumer
         protected int consumedCarbs;
@@ -24,7 +25,7 @@ abstract class Animal implements Consumer, Edible, Moveable {
         protected int fat;
         protected int meat;
 
-    public Animal(int age, int sanity, int weight, int temperature, Coords coords){
+    public Animal(int age, int sanity, int weight, int temperature, Coords coords, Ground ground){
         //initializes the bodypart list, also easy to copy-paste.
         this.bodyparts = new BodyPart[] 
         {
@@ -36,8 +37,13 @@ abstract class Animal implements Consumer, Edible, Moveable {
         this.weight = weight;
         this.temperature = temperature;
         this.coords = coords;
+        this.ground = ground;
     }
 
+    
+    /** 
+     * @return int[]
+     */
     public int[] getStats() {
         int[] fullStats = {0, 0, 0};
         for(BodyPart bodypart: bodyparts){
@@ -76,12 +82,15 @@ abstract class Animal implements Consumer, Edible, Moveable {
     public int[] getNutrients(){return(new int[] {this.carbs,this.fungi,this.roots,this.fat,this.meat});}
 
     //TODO: implement inspect
-    public String inspect(int perception){return("");}
+    public String[] inspect(int perception){
+        return(new String[] {});
+    }
 
     //TODO: implement tick
     public void tick(){}
 
     public Coords getCoords(){return(this.coords);}
-    public void setCoords(Coords coords){this.coords = coords;}
+    public Ground getGround(){return(this.ground);}
+    public void transfer(Coords coords){this.ground.transfer(this, coords);this.coords = coords;this.ground = World.getSpot(coords);}
 
 }

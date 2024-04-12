@@ -31,13 +31,8 @@ public class World {
         //TODO: make it move around the player
         
         //if it's not moving within the current world, it has to bring a hardsaved chunk into memory to add it.
-        if(inCurrentWorld(object.getCoords())){
-            World.getSpot(newCoords).addObject(
-                /*using the object-returning properties of "removeObject", it both removes the object from
-                its existing spot and preps the object for addition to its new position*/
-                World.getSpot(object.getCoords()).removeObject(object)
-            );
-            object.setCoords(newCoords);
+        if(inCurrentWorld(newCoords)){
+            World.getSpot(newCoords).addObject(object);
         }
     }
 
@@ -48,6 +43,13 @@ public class World {
                 world[i][j].tick();
             }
         }
+        
+        for(int i=0;i<7;i++){
+            System.out.println();
+            for(int j=0;j<7;j++){
+                world[i][j].clearFlagged();
+            }
+        }       
     }
 
     public static void generateAll(){

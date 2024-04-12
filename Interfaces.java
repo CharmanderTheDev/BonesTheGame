@@ -15,7 +15,7 @@ interface Avian extends Alive{
     public int getAltitude();
 }
 
-interface Consumer extends Animal{
+interface Consumer extends Alive{
     /**
      * @return this.consumedNutrients, the amount of nutrients an animal has access to
      */
@@ -103,9 +103,9 @@ interface Physical extends Part{
 }
 
 interface Solid extends Physical{
-    //**
-      * @return an arraylist of liquids that the solid object is currently soaked in
-      */
+    /** hello world
+     * @return an arraylist of liquids that the solid object is currently soaked in
+     */
     public ArrayList<Liquid> getSoakedIn();
 
     /**
@@ -123,7 +123,12 @@ interface Growable extends Physical {
 
 interface Moveable extends Physical {
     /**
-     * @param coords the coordinates you would like to set the object's coordinates to
+     * @param coords the coordinates you would like to move the object to
      */
-    public void setCoords(Coords coords);
+    public void transfer(Coords coords);
+
+    /**
+     * @return the ground that this Moveable object belongs to
+     */
+    public Ground getGround();
 }
