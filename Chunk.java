@@ -12,9 +12,15 @@ public class Chunk {
      */
     protected ArrayList<Leviathan> leviathans;
 
-    public Chunk() {
+    /**
+     * the coordinates of the chunk in the chunk-grid
+     */
+    protected Coords coords;
+
+    public Chunk(Coords coords) {
         this.ground = new Ground[15][15];
         this.leviathans = new ArrayList<Leviathan>();
+        this.coords = coords;
     }
 
     /**
@@ -30,14 +36,19 @@ public class Chunk {
      * fills chunk with basic dirt
      */
     public void generateChunk(){
-        for(int i=0;i<15;i++){for(int j=0;j<15;j++){this.ground[i][j] = new Dirt(0,0,0,0,0,0,0,0, new Coords(i,j), this);}}
+        for(int i=0;i<15;i++){for(int j=0;j<15;j++){this.ground[i][j] = new Dirt(0,0,0,0,0,0,0,0, new Coords(i+(this.coords.getX()*15),j+(this.coords.getY())), this);}}
     }
 
     /**
-     * @param coords the coordinates of the spot desired
+     * @param coords the coordinates of the spot desired within the chunk
      * @return the Ground object at the coordinates specified
      */
     public Ground getSpot(Coords coords){return(this.ground[coords.getX()][coords.getY()]);}
+
+    /**
+     * @return the chunk-grid coordinates of this chunk
+     */
+    public Coords getCoords(){return(this.coords);}
 
     /**
      * ticks every ground object in the chunk
