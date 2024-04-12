@@ -1,5 +1,7 @@
 import static java.lang.Math.*;
 
+//IMPORTANT NOTICE: ALL COORDS OBJECTS SHOULD FROM NOW ON REFER TO WORLDCOORDS, ONLY ANONYMOUS AND TEMPORARY ONES SHOULD BE OTHERWISE. THIS SHOULD SIMPLIFY THINGS
+
 public class World {
     
     private static Chunk[][] world = new Chunk[7][7];
