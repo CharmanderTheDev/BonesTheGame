@@ -1,4 +1,4 @@
-public class Liquid implements Physical {
+public abstract class Liquid implements Physical, Drawable {
     
     public int amount;
     public int temperature;
@@ -14,7 +14,7 @@ public class Liquid implements Physical {
         this.container = container;
     }
 
-    public void tick() {
+    public void flow(String type) {
         //flowing
         if(this.container instanceof Ground){
             int amountlower = 1;
@@ -23,7 +23,7 @@ public class Liquid implements Physical {
             }if(this.amount/amountlower!=0){
             for(Ground ground: World.getAdjacent(this.coords)){
                 if(ground.getHeight()<((Ground)this.container).getHeight()){
-                    ground.addObject(new Liquid(this.temperature,this.weight/amountlower,this.amount/amountlower,ground.getCoords(),ground));
+                    ground.addObject(LiquidFactory.getLiquid(type, this.temperature,this.weight/amountlower,this.amount/amountlower,ground.getCoords(),ground));
                 }
             }this.amount = this.amount/amountlower;}
         }
@@ -51,5 +51,9 @@ public class Liquid implements Physical {
 
     public Physical getContainer(){
         return(this.container);
+    }
+
+    public char drawChar(){
+        return('\u2245');
     }
 }

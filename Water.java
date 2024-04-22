@@ -11,8 +11,10 @@ public class Water extends Liquid {
     }
 
     public Color drawColor() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'drawColor'");
+        return(new Color(0,0,255));
     }
 
+    public void tick(){
+        super.flow("Water");
+    }
 }
