@@ -48,4 +48,8 @@ public class Coords {
     public boolean equals(Coords coords){
         return((coords.getX()==this.getX())&&(coords.getY()==this.getY()));
     }
+
+    public static String toString(Coords coords){
+        return("x"+Integer.toString(coords.getX())+"y"+Integer.toString(coords.getY()));
+    }
 }

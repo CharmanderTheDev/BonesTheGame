@@ -59,7 +59,7 @@ interface Flammable extends Physical{
     public int getFuel();
 }
 
-interface Liquid extends Physical{
+interface Liquid extends Physical, Drawable {
     /**
      * @return viscocity, or flow rate, of a given liquid
      */
@@ -127,8 +127,5 @@ interface Moveable extends Physical {
      */
     public void transfer(Coords coords);
 
-    /**
-     * @return the ground that this Moveable object belongs to
-     */
-    public Ground getGround();
+    public void setCoords(Coords coords);
 }

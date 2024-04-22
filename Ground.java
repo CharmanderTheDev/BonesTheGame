@@ -16,9 +16,8 @@ abstract class Ground implements Physical, Drawable {
     protected ArrayList<Physical> markedForAddition;
 
     protected Coords coords;
-    protected Chunk chunk;
 
-    public Ground(int height, int temperature, int weight, int lifeForce, int warp, int vapors, int sunlight, Coords coords, Chunk chunk) { 
+    public Ground(int height, int temperature, int weight, int lifeForce, int warp, int vapors, int sunlight, Coords coords) { 
         this.height = height;
         this.temperature = temperature;
         this.weight = weight;
@@ -32,7 +31,6 @@ abstract class Ground implements Physical, Drawable {
         this.markedForAddition = new ArrayList<Physical>();
 
         this.coords = coords;
-        this.chunk = chunk;
     }
 
     public int getHeight(){return(this.height);}
@@ -82,8 +80,6 @@ abstract class Ground implements Physical, Drawable {
         for(Physical object: this.markedForRemoval){this.population.remove(object);}this.markedForRemoval.clear();
         for(Physical object: this.markedForAddition){this.population.add(object);}this.markedForAddition.clear();
     }
-
-    public void transfer(Moveable object, Coords newCoords){World.transfer(object, newCoords);this.removeObject(object);}
 
     public void tick(){
         for(Physical object: this.population){object.tick();}

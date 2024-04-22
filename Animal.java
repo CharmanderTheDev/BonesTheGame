@@ -9,7 +9,6 @@ abstract class Animal implements Consumer, Edible, Moveable {
         protected int weight;
         protected int temperature;
         protected Coords coords;
-        protected Ground ground;
 
         //Consumer
         protected int consumedCarbs;
@@ -25,7 +24,7 @@ abstract class Animal implements Consumer, Edible, Moveable {
         protected int fat;
         protected int meat;
 
-    public Animal(int age, int sanity, int weight, int temperature, Coords coords, Ground ground){
+    public Animal(int age, int sanity, int weight, int temperature, Coords coords){
         //initializes the bodypart list, also easy to copy-paste.
         this.bodyparts = new BodyPart[] 
         {
@@ -37,7 +36,6 @@ abstract class Animal implements Consumer, Edible, Moveable {
         this.weight = weight;
         this.temperature = temperature;
         this.coords = coords;
-        this.ground = ground;
     }
 
     
@@ -90,7 +88,7 @@ abstract class Animal implements Consumer, Edible, Moveable {
     public void tick(){}
 
     public Coords getCoords(){return(this.coords);}
-    public Ground getGround(){return(this.ground);}
-    public void transfer(Coords coords){this.ground.transfer(this, coords);this.coords = coords;this.ground = World.getSpot(coords);}
+    public void setCoords(Coords coords){this.coords = coords;}
+    public void transfer(Coords coords){World.transfer(this, coords);}
 
 }

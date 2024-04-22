@@ -9,8 +9,8 @@ public class Dirt extends Ground implements Growable {
     protected ArrayList<Plant> plantMarkedForRemoval;
     protected ArrayList<Plant> plantMarkedForAddition;
     
-    public Dirt(int fertility, int height, int temperature, int weight, int lifeForce, int warp, int vapors, int sunlight, Coords coords, Chunk chunk){
-        super(height, temperature, weight, lifeForce, warp, vapors, sunlight, coords, chunk);
+    public Dirt(int fertility, int height, int temperature, int weight, int lifeForce, int warp, int vapors, int sunlight, Coords coords){
+        super(height, temperature, weight, lifeForce, warp, vapors, sunlight, coords);
         this.fertility = fertility;
         this.foliage = new ArrayList<Plant>();
         this.plantMarkedForRemoval = new ArrayList<Plant>();
@@ -20,7 +20,8 @@ public class Dirt extends Ground implements Growable {
     @Override
     public char drawChar(){
         if(super.drawChar()!='\0'){return(super.drawChar());}
-        return('#');
+        if(this.foliage.isEmpty()){return('\u2E2C');}
+        else{return(this.foliage.get(0)).drawChar();}
     }
     public Color drawColor(){return(new Color(150, 75, 0));}
 
@@ -37,6 +38,11 @@ public class Dirt extends Ground implements Growable {
     }
 
     public int getFertility(){return(this.fertility);}
+    public int getFertilitySum(){
+        int leftFertility = this.fertility;
+        for(Plant plant : this.foliage){leftFertility -= plant.getFertility();}
+        return(leftFertility);
+    }
 
     public void setFertility(int fertility){this.fertility = fertility;}
 
