@@ -84,7 +84,8 @@ abstract class Ground implements Physical, Drawable {
     public void tick(){
         for(Physical object: this.population){object.tick();}
     }
-    
+    //TODO: add liquid combining 
+
     /** 
      * draws entities & objects within this ground object based on a hierarchy as follows
      * Player > Animal > Plant > everything else
@@ -94,7 +95,12 @@ abstract class Ground implements Physical, Drawable {
      */
     public char drawChar(){
         for(Physical object: this.population){
+            //The Player (GOAT)
             if(object instanceof Player){
+                return(((Drawable) object).drawChar());
+            }
+            //Liquids
+            if(object instanceof Liquid){
                 return(((Drawable) object).drawChar());
             }
         }

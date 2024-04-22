@@ -59,18 +59,6 @@ interface Flammable extends Physical{
     public int getFuel();
 }
 
-interface Liquid extends Physical, Drawable {
-    /**
-     * @return viscocity, or flow rate, of a given liquid
-     */
-    public int getViscocity();
-
-    /**
-     * @return the amount of said liquid (ml) in a given Liquid object
-     */
-    public int getAmount();
-}
-
 interface Part {
 
     /**
