@@ -19,13 +19,14 @@ public abstract class Liquid implements Physical, Drawable {
         if(this.container instanceof Ground){
             int amountlower = 1;
             for(Ground ground: World.getAdjacent(this.coords)){
-                if(ground.getHeight()<((Ground)this.container).getHeight()){amountlower++;}
+                if(ground.getHeight()>=((Ground)this.container).getHeight()){amountlower++;}
             }if(this.amount/amountlower!=0){
             for(Ground ground: World.getAdjacent(this.coords)){
-                if(ground.getHeight()<((Ground)this.container).getHeight()){
+                if(ground.getHeight()>=((Ground)this.container).getHeight()){
                     ground.addObject(LiquidFactory.getLiquid(type, this.temperature,this.weight/amountlower,this.amount/amountlower,ground.getCoords(),ground));
                 }
             }this.amount = this.amount/amountlower;}
+            System.out.println(amountlower);
         }
     }
 
@@ -45,6 +46,10 @@ public abstract class Liquid implements Physical, Drawable {
         return(this.amount);
     }
 
+    public void setAmount(int amount){
+        this.amount=amount;
+    }
+
     public Coords getCoords(){
         return(this.coords);
     }
@@ -54,6 +59,6 @@ public abstract class Liquid implements Physical, Drawable {
     }
 
     public char drawChar(){
-        return('\u2245');
+        return('\u2248');
     }
 }

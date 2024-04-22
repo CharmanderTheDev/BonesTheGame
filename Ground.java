@@ -80,9 +80,27 @@ abstract class Ground implements Physical, Drawable {
         for(Physical object: this.markedForRemoval){this.population.remove(object);}this.markedForRemoval.clear();
         for(Physical object: this.markedForAddition){this.population.add(object);}this.markedForAddition.clear();
     }
+    
+    public void combineLiquids(){
+        for(Physical object: population){
+            if(object instanceof Liquid && !this.markedForRemoval.contains(object)){
+                for(int i=population.indexOf(object);i<population.size();i++){
+                    if(population.get(i).getClass()==object.getClass()){
+                        ((Liquid) object).setAmount(((Liquid)population.get(i)).getAmount()+((Liquid) object).getAmount());
+                        this.removeObject(population.get(i));
+                    }
+                }
+            }
+        }
+    }
 
     public void tick(){
-        for(Physical object: this.population){object.tick();}
+        this.combineLiquids();
+        //Ticking objects
+        for(Physical object: this.population){
+            object.tick();
+        }
+
     }
     //TODO: add liquid combining 
 

@@ -25,14 +25,14 @@ public class World {
     }
 
     public static Ground[] getAdjacent(Coords coords){
-        Ground[] adjacent = new Ground[] {};
+        Ground[] adjacent = new Ground[4];
         adjacent[0] = getSpot(new Coords(coords.getX(), coords.getY()+1));
         adjacent[1] = getSpot(new Coords(coords.getX(), coords.getY()-1));
         adjacent[2] = getSpot(new Coords(coords.getX()+1, coords.getY()));
         adjacent[3] = getSpot(new Coords(coords.getX()-1, coords.getY()));
         return(adjacent);
     }
-    
+
     public static void tick(){
         for(int i=0;i<256;i++){
             for(int j=0;j<256;j++){
@@ -55,6 +55,7 @@ public class World {
                 
             }
         }
+        world[3][6].addObject(new Water(0,100,0,new Coords(3,6),world[3][6]));
     }
 }
 
