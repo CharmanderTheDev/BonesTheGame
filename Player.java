@@ -33,7 +33,8 @@ class Player extends Animal implements Drawable {
 
     //TODO: implement tick
     public void tick() {
-        this.transfer(World.getAdjacent(this.coords)[((int)(Math.random()*4))].getCoords());
+        Ground newGround = World.getAdjacent(this.coords)[((int)(Math.random()*4))];
+        this.transfer(newGround!=null?newGround.getCoords():this.coords);
     }
 
     public char drawChar(){return('@');}

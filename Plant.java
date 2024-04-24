@@ -1,5 +1,6 @@
 abstract class Plant implements Alive, Drawable {
     
+    public static int plantCount;
     protected int age;
     protected int weight;
     protected int temperature;
@@ -10,6 +11,7 @@ abstract class Plant implements Alive, Drawable {
 
 
     public Plant(int age, int weight, int temperature, int fertility, int germination, Drug drug, Coords coords){
+        plantCount++;
         this.age = age;
         this.weight = weight;
         this.temperature = temperature;

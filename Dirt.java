@@ -33,7 +33,7 @@ public class Dirt extends Ground implements Growable {
         int fertilitysum = 0;
         for(Plant plant : foliage){plant.tick();fertilitysum+=plant.getFertility();}
         if(fertilitysum>this.fertility){for(Plant plant: foliage){
-        if(Math.random()>(1.0/fertilitysum)){this.removePlants(plant);/*System.out.println("I died!");*/}}}
+        if(Math.random()>(1.0/((double)fertilitysum))){this.removePlants(plant);/*System.out.println("I died!");*/}}}
 
     }
 
