@@ -34,13 +34,26 @@ abstract class Ground implements Physical, Drawable {
     }
 
     public int getHeight(){return(this.height);}
+    public void setHeight(int height){this.height = height;}
+
     public int getTemperature(){return(this.temperature);}
+    public void setTemperature(int temperature){this.temperature = temperature;}
+
     public int getWeight(){return(this.weight);}
-    
+    public void setWeight(int weight){this.weight = weight;}
+
+
     public int getLifeForce(){return(this.lifeForce);}
+    public void setLifeForce(int lifeForce){this.lifeForce = lifeForce;}
+
     public int getWarp(){return(this.warp);}
+    public void setWarp(int warp){this.warp = warp;}
+
     public int getVapors(){return(this.vapors);}
+    public void setVapors(int vapors){this.vapors = vapors;}
+
     public int getSunlight(){return(this.sunlight);}
+    public void setSunlight(){this.sunlight = sunlight;}
     
     public Coords getCoords(){return(this.coords);}
 
@@ -84,9 +97,9 @@ abstract class Ground implements Physical, Drawable {
     public void combineLiquids(){
         for(Physical object: population){
             if(object instanceof Liquid && !this.markedForRemoval.contains(object)){
-                for(int i=population.indexOf(object);i<population.size();i++){
+                for(int i=population.indexOf(object)+1;i<population.size();i++){
                     if(population.get(i).getClass()==object.getClass()){
-                        ((Liquid) object).setAmount(((Liquid)population.get(i)).getAmount()+((Liquid) object).getAmount());
+                        ((Liquid) object).addAmount(((Liquid)population.get(i)).getAmount());
                         this.removeObject(population.get(i));
                     }
                 }
@@ -112,16 +125,10 @@ abstract class Ground implements Physical, Drawable {
      * @return the character to be drawn
      */
     public char drawChar(){
-        for(Physical object: this.population){
-            //The Player (GOAT)
-            if(object instanceof Player){
-                return(((Drawable) object).drawChar());
-            }
-            //Liquids
-            if(object instanceof Liquid){
-                return(((Drawable) object).drawChar());
-            }
-        }
+        Class<?>[] classes = {Player.class, Water.class};
+        for(Class<?> type: classes){for(Physical object: population){
+            if(object.getClass() == type){return(((Drawable) object).drawChar());}
+        }}
         return('\0');
     }
 }

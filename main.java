@@ -18,6 +18,8 @@ class Main {
             //moving
             waitOne();
         }
+        //int[][] noise = NoiseGen.getNoise(40);
+        //for(int i=0;i<40;i++){System.out.println();for(int j=0;j<40;j++){System.out.print(noise[i][j]);}}
     }
     //just allows us to decide when the tick will go
     public static void waitOne(){

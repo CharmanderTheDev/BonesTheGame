@@ -14,7 +14,9 @@ public class Water extends Liquid {
         return(new Color(0,0,255));
     }
 
+    @Override
     public void tick(){
-        super.flow("Water");
+        super.tick();
+        //super.flow("Water");
     }
 }
