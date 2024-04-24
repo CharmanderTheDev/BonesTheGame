@@ -2,8 +2,8 @@ import java.awt.*;
 
 public class Creep extends Plant {
     
-    public Creep(int age, int weight, int temperature, int fertility, Drug drug, Coords coords){
-        super(age, weight, temperature, fertility, drug, coords);
+    public Creep(int age, int temperature, Coords coords){
+        super(age, 1, temperature, 1, 2, null, coords);
     }
 
     public char drawChar(){
@@ -16,5 +16,10 @@ public class Creep extends Plant {
 
     public String[] inspect(int perception){
         return(super.inspect(perception));
+    }
+
+    public void tick(){
+        super.tick();
+        this.spread("Creep");
     }
 }

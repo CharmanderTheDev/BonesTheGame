@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 class Main {
     public static void main(String[] args){
         World.generateAll();
-        World.getSpot(new Coords (0,0)).addObject(new Player(0,0,0,0, new Coords(0,0)));
+        World.getSpot(new Coords (8,8)).addObject(new Player(0,0,0,0, new Coords(8,8)));
         World.tick();
         while(true){
             World.tick();

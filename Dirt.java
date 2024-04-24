@@ -30,7 +30,11 @@ public class Dirt extends Ground implements Growable {
      */
     public void tick() {
         super.tick();
-        for(Plant plant : foliage){plant.tick();}
+        int fertilitysum = 0;
+        for(Plant plant : foliage){plant.tick();fertilitysum+=plant.getFertility();}
+        if(fertilitysum>this.fertility){for(Plant plant: foliage){
+        if(Math.random()>(1.0/fertilitysum)){this.removePlants(plant);/*System.out.println("I died!");*/}}}
+
     }
 
     public String[] inspect(int perception) {
@@ -39,9 +43,11 @@ public class Dirt extends Ground implements Growable {
 
     public int getFertility(){return(this.fertility);}
     public int getFertilitySum(){
-        int leftFertility = this.fertility;
-        for(Plant plant : this.foliage){leftFertility -= plant.getFertility();}
-        return(leftFertility);
+        int sum = this.fertility;
+        for(Plant plant : foliage){
+            sum-=plant.getFertility();
+        }
+        return(sum);
     }
 
     public void setFertility(int fertility){this.fertility = fertility;}
