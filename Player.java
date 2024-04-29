@@ -3,7 +3,7 @@ import java.awt.*;
 class Player extends Animal {
 
     //moving
-    enum Direction{UP,DOWN,LEFT,RIGHT}
+    enum Direction{UP,DOWN,LEFT,RIGHT,STILL}
     public Direction direction = Direction.LEFT;
 
     //Body parts
@@ -42,7 +42,9 @@ class Player extends Animal {
         if(this.direction==Direction.DOWN){newGround = World.getAdjacent(this.coords)[2];}
         if(this.direction==Direction.LEFT){newGround = World.getAdjacent(this.coords)[1];}
         if(this.direction==Direction.RIGHT){newGround = World.getAdjacent(this.coords)[0];}
+        if(this.direction==Direction.STILL){newGround = World.getSpot(this.coords);}
         this.transfer(newGround!=null?newGround.getCoords():this.coords);
+        if(World.getSpot(this.coords).contains(Chaser.class)){System.out.println("you died!");}
     }
 
     public char drawChar(){return('@');}

@@ -2,6 +2,8 @@ import java.util.*;
 
 abstract class Ground implements Physical, Drawable {
 
+    protected int struck;
+
     protected int height;
     protected int temperature;
     protected int weight;
@@ -119,9 +121,42 @@ abstract class Ground implements Physical, Drawable {
         }
     }
 
+    public void manageSunlight(){
+        if(World.dayTime){
+        switch(World.sunPhase){
+            case DEAD: this.sunlight = 0;
+            case SPARKING: 
+                if(Math.random()>.999&&this.struck==-1){this.struck=5;}
+            case GLOWING: this.sunlight = (int) (Math.random()*10)+10;
+            case BURNING: this.sunlight = (int) (Math.random()*20)+20;
+            case DYING: this.sunlight = (int) (Math.random()*5)+5;
+        }}else{this.sunlight=0;}
+    }
 
+    public void manageTemperature(){
+        //Sunlight temp manager
+        this.temperature+=this.sunlight;
+
+        //removes 10% of heat in this block
+        this.temperature = (this.temperature * 9) / 10;
+
+        //disperses a further 10% outward
+        int total = 0;
+        for(Ground ground: World.getAdjacent(this.coords)){
+            if(ground!=null){total++;}
+        }
+        for(Ground ground: World.getAdjacent(this.coords)){
+            if(ground!=null){ground.addTemperature(this.temperature/(10*total));}
+        }this.temperature = (this.temperature * 9) / 10;
+
+        //Sparking manager
+        if(this.struck>0){this.struck--;}
+        if(this.struck==0){this.struck=-1;this.temperature=1000;}
+    }
 
     public void tick(){
+        this.manageSunlight();
+        this.manageTemperature();
         this.combineLiquids();
         //Ticking objects
         for(Physical object: this.population){
@@ -140,10 +175,15 @@ abstract class Ground implements Physical, Drawable {
      * @return the character to be drawn
      */
     public char drawChar(){
+        //Drawing the struck marker
+        if(this.struck>0){return('O');}
+        
+        //Drawing all the stuff on it
         Class<?>[] classes = {Player.class, Chaser.class, Water.class};
         for(Class<?> type: classes){for(Physical object: population){
             if(object.getClass() == type){return(((Drawable) object).drawChar());}
         }}
+
         return('\0');
     }
 }

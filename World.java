@@ -3,10 +3,18 @@ import java.util.*;
 
 //IMPORTANT NOTE: THE GAME IS BEING SCALED DOWN FROM AN INFINITE WORLD TO A FINITE BUT CONSTANTLY LOADED AND SHIFTING ONE.
 public class World {
+    static enum MoonPhase{CONCEPTION,BIRTH,GROWTH,TENURE,DEATH}
+    static MoonPhase moonPhase = MoonPhase.GROWTH;
+    static enum SunPhase{DEAD,SPARKING,GLOWING,BURNING,DYING}
+    static SunPhase sunPhase = SunPhase.SPARKING;
+
+    static boolean dayTime = true;
 
     public static final boolean printChaserCoords = false;
     public static final boolean printChaserFinds = false;
     public static final boolean printSight = false;
+
+    public static int age;
 
     private static Ground[][] world = new Ground[256][256];
 
@@ -64,6 +72,10 @@ public class World {
     }
 
     public static void tick(){
+        age++;
+        if(age%100==0){
+            phaseManager();
+        }
         for(int i=0;i<256;i++){
             for(int j=0;j<256;j++){
                 world[i][j].tick();
@@ -76,6 +88,19 @@ public class World {
             }
         }       
     }
+
+    public static void phaseManager(){
+        for(int i=5;i>=1;i--){
+            if(age%100*i==0){moonPhase = MoonPhase.values()[i];}
+        }
+
+        for(int i=5;i>=1;i--){
+            if(age%250*i==0){sunPhase = SunPhase.values()[i];}
+        }
+    }
+
+    public static MoonPhase getMoonPhase(){return(moonPhase);}
+    public static SunPhase getSunPhase(){return(sunPhase);}
 
     public static void generateAll(){
         int[][] fertilitynoise = NoiseGen.getNoise(256, 0, 8, 0, Integer.MIN_VALUE);
