@@ -90,6 +90,9 @@ public class World {
                 
                 //Adding the water
                 if(world[i][j].getHeight()<6){world[i][j].addObject(new Water(10,10,68,new Coords(i,j), world[i][j]));}
+                
+                //Adding the chasers
+                if(Math.random()>.99){world[i][j].addObject(new Chaser(0,0,0,0, new Coords(i,j)));}
             }
         }
     }
