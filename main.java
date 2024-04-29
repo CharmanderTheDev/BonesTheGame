@@ -5,7 +5,7 @@ class Main {
     public static void main(String[] args){
         World.generateAll();
         World.getSpot(new Coords (8,8)).addObject(new Player(0,0,0,0, new Coords(8,8)));
-        World.getSpot(new Coords (5,5)).addObject(new Chaser(0,0,0,0, new Coords(5,5)));
+        for(int i=0;i<0;i++){World.getSpot(new Coords (5,5)).addObject(new Chaser(0,0,0,0, new Coords(5,5)));}
         while(true){
             //displaying
             for(int i=0;i<16;i++){

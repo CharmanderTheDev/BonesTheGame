@@ -44,7 +44,6 @@ public class World {
             if(printSight){System.out.print(around[i][j]==null?"X":(around[i][j].contains(Player.class)?"!":"O"));}
             aroundlist[(i*((range*2)+1))+j] = around[i][j];
         }}
-        System.out.println(aroundlist.length);
         return(aroundlist);
     }
 
