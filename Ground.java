@@ -53,10 +53,21 @@ abstract class Ground implements Physical, Drawable {
     public void setVapors(int vapors){this.vapors = vapors;}
 
     public int getSunlight(){return(this.sunlight);}
-    public void setSunlight(){this.sunlight = sunlight;}
+    public void setSunlight(int sunlight){this.sunlight = sunlight;}
     
     public Coords getCoords(){return(this.coords);}
 
+    public boolean contains(Class<?> type){
+        for(Physical object: this.population){
+            if(object.getClass() == type){return(true);}
+        }return(false);
+    }
+
+    public Physical getType(Class<?> type){
+        for(Physical object: this.population){
+            if(object.getClass()==type){return(object);}
+        }return(null);
+    }
     
     /** 
      * @param includeFlagged whether or not to include objects that are flagged for deletion
@@ -125,7 +136,7 @@ abstract class Ground implements Physical, Drawable {
      * @return the character to be drawn
      */
     public char drawChar(){
-        Class<?>[] classes = {Player.class, Water.class};
+        Class<?>[] classes = {Player.class, Chaser.class, Water.class};
         for(Class<?> type: classes){for(Physical object: population){
             if(object.getClass() == type){return(((Drawable) object).drawChar());}
         }}

@@ -52,4 +52,18 @@ public class Coords {
     public static String toString(Coords coords){
         return("x"+Integer.toString(coords.getX())+"y"+Integer.toString(coords.getY()));
     }
+
+    public static double distance(Coords a, Coords b){
+        int dx = a.getX() - b.getX();
+        int dy = a.getY() - b.getY();
+        return(Math.sqrt(Math.pow(dx,2) + Math.pow(dy, 2)));
+    }
+
+    public static Coords add(Coords a, Coords b){
+        return(new Coords(a.getX()+b.getX(), a.getY()+b.getY()));
+    }
+
+    public static Coords multiply(Coords coords, int factor){
+        return(new Coords(coords.getX()*factor, coords.getY()*factor));
+    }
 }

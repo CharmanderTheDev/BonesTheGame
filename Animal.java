@@ -1,4 +1,4 @@
-abstract class Animal implements Consumer, Edible, Moveable {
+abstract class Animal implements Consumer, Edible, Moveable, Drawable {
 
     protected BodyPart[] bodyparts;
 
@@ -91,4 +91,7 @@ abstract class Animal implements Consumer, Edible, Moveable {
     public void setCoords(Coords coords){this.coords = coords;}
     public void transfer(Coords coords){World.transfer(this, coords);}
 
+    protected Ground[] getSight(){
+        return(World.getAround(this.coords, this.getPerception()));
+    }
 }

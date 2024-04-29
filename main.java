@@ -5,9 +5,8 @@ class Main {
     public static void main(String[] args){
         World.generateAll();
         World.getSpot(new Coords (8,8)).addObject(new Player(0,0,0,0, new Coords(8,8)));
-        World.tick();
+        World.getSpot(new Coords (5,5)).addObject(new Chaser(0,0,0,0, new Coords(5,5)));
         while(true){
-            World.tick();
             //displaying
             for(int i=0;i<16;i++){
                 System.out.println();
@@ -16,6 +15,7 @@ class Main {
                 }
             }
             //moving
+            World.tick();
             waitOne();
         }
         //int[][] noise = NoiseGen.getNoise(40);

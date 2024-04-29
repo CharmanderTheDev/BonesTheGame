@@ -4,6 +4,10 @@ import java.util.*;
 //IMPORTANT NOTE: THE GAME IS BEING SCALED DOWN FROM AN INFINITE WORLD TO A FINITE BUT CONSTANTLY LOADED AND SHIFTING ONE.
 public class World {
 
+    public static final boolean printChaserCoords = false;
+    public static final boolean printChaserFinds = false;
+    public static final boolean printSight = false;
+
     private static Ground[][] world = new Ground[256][256];
 
     public static Ground getSpot(Coords coords){
@@ -27,6 +31,23 @@ public class World {
         }
     }
 
+    public static Ground[] getAround(Coords coords, int range){
+        Ground[][] around = new Ground[(range*2)+1][(range*2)+1];
+        //Looping through "around"
+        for(int i=coords.getX()-range;i<coords.getX()+range;i++){for(int j=coords.getY()-range;j<coords.getY()+range;j++){
+            if(((int)Coords.distance(new Coords(i,j), coords))<=range){around[i-(coords.getX()-range)][j-(coords.getY()-range)]=getSpot(new Coords(i,j));}
+        }}
+
+        //converting "around" to a 1d list
+        Ground[] aroundlist = new Ground[((range*2)+1)*((range*2)+1)];
+        for(int i=0;i<(range*2)+1;i++){if(printSight){System.out.println();}for(int j=0;j<(range*2)+1;j++){
+            if(printSight){System.out.print(around[i][j]==null?"X":(around[i][j].contains(Player.class)?"!":"O"));}
+            aroundlist[(i*((range*2)+1))+j] = around[i][j];
+        }}
+        System.out.println(aroundlist.length);
+        return(aroundlist);
+    }
+
     public static Ground[] getAdjacent(Coords coords){
         Ground[] adjacent = new Ground[4];
         adjacent[0] = getSpot(new Coords(coords.getX(), coords.getY()+1));
@@ -34,6 +55,13 @@ public class World {
         adjacent[2] = getSpot(new Coords(coords.getX()+1, coords.getY()));
         adjacent[3] = getSpot(new Coords(coords.getX()-1, coords.getY()));
         return(adjacent);
+    }
+
+
+    public static Coords chase(Physical chaser, Physical chased){
+        int dx = chased.getCoords().getX() - chaser.getCoords().getX();
+        int dy = chased.getCoords().getY() - chaser.getCoords().getY();
+        return(new Coords(chaser.getCoords().getX()+Helper.reduce(dx), chaser.getCoords().getY()+Helper.reduce(dy)));
     }
 
     public static void tick(){
