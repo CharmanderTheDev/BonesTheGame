@@ -2,6 +2,10 @@ import java.awt.*;
 
 class Player extends Animal {
 
+    //moving
+    enum Direction{UP,DOWN,LEFT,RIGHT}
+    public Direction direction = Direction.LEFT;
+
     //Body parts
     private BodyPart rLeg; private BodyPart lLeg;
     private BodyPart rArm; private BodyPart lArm; 
@@ -33,7 +37,11 @@ class Player extends Animal {
 
     //TODO: implement tick
     public void tick() {
-        Ground newGround = World.getAdjacent(this.coords)[((int)(Math.random()*4))];
+        Ground newGround = null;
+        if(this.direction==Direction.UP){newGround = World.getAdjacent(this.coords)[3];}
+        if(this.direction==Direction.DOWN){newGround = World.getAdjacent(this.coords)[2];}
+        if(this.direction==Direction.LEFT){newGround = World.getAdjacent(this.coords)[1];}
+        if(this.direction==Direction.RIGHT){newGround = World.getAdjacent(this.coords)[0];}
         this.transfer(newGround!=null?newGround.getCoords():this.coords);
     }
 

@@ -38,6 +38,7 @@ abstract class Ground implements Physical, Drawable {
 
     public int getTemperature(){return(this.temperature);}
     public void setTemperature(int temperature){this.temperature = temperature;}
+    public void addTemperature(int temperature){this.temperature += temperature;}
 
     public int getWeight(){return(this.weight);}
     public void setWeight(int weight){this.weight = weight;}
@@ -118,12 +119,15 @@ abstract class Ground implements Physical, Drawable {
         }
     }
 
+
+
     public void tick(){
         this.combineLiquids();
         //Ticking objects
         for(Physical object: this.population){
             object.tick();
         }
+
 
     }
     //TODO: add liquid combining 
