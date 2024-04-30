@@ -21,7 +21,7 @@ class Main {
                 }
             }
             //moving
-            //waitOne(player);
+            waitOne(player);
             World.tick();
 
         }
@@ -39,4 +39,9 @@ class Main {
             if(move.equals(" ")){player.direction = Player.Direction.STILL;}
         }catch(Exception e){}
     }
+
+    public static void clearScreen() {  
+        System.out.print("\033[H\033[2J");  
+        System.out.flush();  
+    }  
 }

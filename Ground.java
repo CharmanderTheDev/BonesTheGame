@@ -124,13 +124,12 @@ abstract class Ground implements Physical, Drawable {
 
     public void manageSunlight(){
         if(World.dayTime){
-        switch(World.sunPhase){
-            case DEAD: this.sunlight = 0;
-            case SPARKING: if(World.sunPhase==World.SunPhase.SPARKING){this.spark();this.sunlight=0;}
-            case GLOWING: this.sunlight = (int) (Math.random()*40)+40;
-            case BURNING: this.sunlight = (int) (Math.random()*80)+80;
-            case DYING: this.sunlight = (int) (Math.random()*20)+20;
-        }}else{this.sunlight=0;}
+        if(World.getSunPhase()==World.SunPhase.DEAD){this.sunlight = 0;}
+        else if(World.getSunPhase()==World.SunPhase.SPARKING){this.spark();this.sunlight=0;}
+        else if(World.getSunPhase()==World.SunPhase.GLOWING){this.sunlight = (int) (Math.random()*40)+40;}
+        else if(World.getSunPhase()==World.SunPhase.BURNING){this.sunlight = (int) (Math.random()*80)+80;}
+        else{this.sunlight = (int) (Math.random()*20)+20;}
+        }else{this.sunlight=0;}
     }
 
     public void spark(){
@@ -141,8 +140,8 @@ abstract class Ground implements Physical, Drawable {
         //Sunlight temp manager
         this.temperature+=this.sunlight;
 
-        //removes 10% of heat in this block
-        this.temperature = (this.temperature * 9) / 10;
+        //removes 1% of heat in this block
+        this.temperature = (this.temperature * 99) / (100*((this.temperature/100)+1));
 
         //disperses a further 10% outward
         int total = 0;

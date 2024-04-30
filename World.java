@@ -18,6 +18,7 @@ public class World {
     public static final boolean printTemperature = true;
     public static final boolean printTotalTemp = true;
     public static final boolean printTotalSun = true;
+    public static final boolean printTime = true;
 
     public static int age;
 
@@ -81,9 +82,7 @@ public class World {
         int totaltemp = 0;
         int totalsun = 0;
 
-        if(age%50==0){
-            phaseManager();
-        }
+        phaseManager();
 
         for(int i=0;i<256;i++){
             for(int j=0;j<256;j++){
@@ -102,18 +101,24 @@ public class World {
         if(printMoonPhase){System.out.println("Moon phase: "+moonPhase);}
         if(printTotalTemp){System.out.println("Total temperature: "+totaltemp);}
         if(printTotalSun){System.out.println("Total sunlight: "+totalsun);}
+        if(printTime){System.out.println(dayTime?"Daytime":"Nighttime");}
     }
 
     public static void phaseManager(){
-        dayTime = !dayTime;
-        if(MoonPhase.values()[4]==moonPhase){moonPhase = MoonPhase.CONCEPTION;}
-        else{
-            mainLoop:for(int i=0;i<4;i++){if(moonPhase==MoonPhase.values()[i]){moonPhase = MoonPhase.values()[i+1];break mainLoop;}}
-        }
-        if(SunPhase.values()[4]==sunPhase){sunPhase = SunPhase.DEAD;}
-        else{
-            mainLoop:for(int i=0;i<4;i++){if(sunPhase==SunPhase.values()[i]){sunPhase = SunPhase.values()[i+1];break mainLoop;}}
-        }
+        
+        if(age%50==0){dayTime = !dayTime;}
+
+        if(age%100==0){
+            if(MoonPhase.values()[4]==moonPhase){moonPhase = MoonPhase.CONCEPTION;}
+            else{
+                mainLoop:for(int i=0;i<4;i++){if(moonPhase==MoonPhase.values()[i]){moonPhase = MoonPhase.values()[i+1];break mainLoop;}}
+            }}
+
+        if(age%350==0){
+            if(SunPhase.values()[4]==sunPhase){sunPhase = SunPhase.DEAD;}
+            else{
+                mainLoop:for(int i=0;i<4;i++){if(sunPhase==SunPhase.values()[i]){sunPhase = SunPhase.values()[i+1];break mainLoop;}}
+            }}
     }
 
     public static MoonPhase getMoonPhase(){return(moonPhase);}

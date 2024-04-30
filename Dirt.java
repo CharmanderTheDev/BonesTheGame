@@ -20,7 +20,7 @@ public class Dirt extends Ground implements Growable {
     @Override
     public char drawChar(){
         if(super.drawChar()!='\0'){return(super.drawChar());}
-        if(this.foliage.isEmpty()){return('\u2E2C');}
+        if(this.foliage.isEmpty()){return(':');}
         else{return(this.foliage.get(0)).drawChar();}
     }
     public Color drawColor(){return(new Color(150, 75, 0));}
