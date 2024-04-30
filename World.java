@@ -13,6 +13,11 @@ public class World {
     public static final boolean printChaserCoords = false;
     public static final boolean printChaserFinds = false;
     public static final boolean printSight = false;
+    public static final boolean printSunPhase = true;
+    public static final boolean printMoonPhase = true;
+    public static final boolean printTemperature = true;
+    public static final boolean printTotalTemp = true;
+    public static final boolean printTotalSun = true;
 
     public static int age;
 
@@ -73,12 +78,18 @@ public class World {
 
     public static void tick(){
         age++;
-        if(age%100==0){
+        int totaltemp = 0;
+        int totalsun = 0;
+
+        if(age%50==0){
             phaseManager();
         }
+
         for(int i=0;i<256;i++){
             for(int j=0;j<256;j++){
                 world[i][j].tick();
+                totaltemp+=world[i][j].getTemperature();
+                totalsun+=world[i][j].getSunlight();
             }
         }
         
@@ -86,16 +97,22 @@ public class World {
             for(int j=0;j<256;j++){
                 world[i][j].clearFlagged();
             }
-        }       
+        }     
+        if(printSunPhase){System.out.println("Sun phase: "+sunPhase);}
+        if(printMoonPhase){System.out.println("Moon phase: "+moonPhase);}
+        if(printTotalTemp){System.out.println("Total temperature: "+totaltemp);}
+        if(printTotalSun){System.out.println("Total sunlight: "+totalsun);}
     }
 
     public static void phaseManager(){
-        for(int i=5;i>=1;i--){
-            if(age%100*i==0){moonPhase = MoonPhase.values()[i];}
+        dayTime = !dayTime;
+        if(MoonPhase.values()[4]==moonPhase){moonPhase = MoonPhase.CONCEPTION;}
+        else{
+            mainLoop:for(int i=0;i<4;i++){if(moonPhase==MoonPhase.values()[i]){moonPhase = MoonPhase.values()[i+1];break mainLoop;}}
         }
-
-        for(int i=5;i>=1;i--){
-            if(age%250*i==0){sunPhase = SunPhase.values()[i];}
+        if(SunPhase.values()[4]==sunPhase){sunPhase = SunPhase.DEAD;}
+        else{
+            mainLoop:for(int i=0;i<4;i++){if(sunPhase==SunPhase.values()[i]){sunPhase = SunPhase.values()[i+1];break mainLoop;}}
         }
     }
 
@@ -117,7 +134,7 @@ public class World {
                 if(world[i][j].getHeight()<6){world[i][j].addObject(new Water(10,10,68,new Coords(i,j), world[i][j]));}
                 
                 //Adding the chasers
-                if(Math.random()>.99){world[i][j].addObject(new Chaser(0,0,0,0, new Coords(i,j)));}
+                if(Math.random()>.999){world[i][j].addObject(new Chaser(0,0,0,0, new Coords(i,j)));}
             }
         }
     }

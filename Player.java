@@ -45,6 +45,7 @@ class Player extends Animal {
         if(this.direction==Direction.STILL){newGround = World.getSpot(this.coords);}
         this.transfer(newGround!=null?newGround.getCoords():this.coords);
         if(World.getSpot(this.coords).contains(Chaser.class)){System.out.println("you died!");}
+        if(World.printTemperature){System.out.println("Temperature at player's feet: "+World.getSpot(this.coords).getTemperature());}
     }
 
     public char drawChar(){return('@');}

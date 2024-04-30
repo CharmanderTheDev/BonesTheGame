@@ -33,6 +33,7 @@ abstract class Ground implements Physical, Drawable {
         this.markedForAddition = new ArrayList<Physical>();
 
         this.coords = coords;
+        this.struck = -1;
     }
 
     public int getHeight(){return(this.height);}
@@ -125,12 +126,15 @@ abstract class Ground implements Physical, Drawable {
         if(World.dayTime){
         switch(World.sunPhase){
             case DEAD: this.sunlight = 0;
-            case SPARKING: 
-                if(Math.random()>.999&&this.struck==-1){this.struck=5;}
-            case GLOWING: this.sunlight = (int) (Math.random()*10)+10;
-            case BURNING: this.sunlight = (int) (Math.random()*20)+20;
-            case DYING: this.sunlight = (int) (Math.random()*5)+5;
+            case SPARKING: if(World.sunPhase==World.SunPhase.SPARKING){this.spark();this.sunlight=0;}
+            case GLOWING: this.sunlight = (int) (Math.random()*40)+40;
+            case BURNING: this.sunlight = (int) (Math.random()*80)+80;
+            case DYING: this.sunlight = (int) (Math.random()*20)+20;
         }}else{this.sunlight=0;}
+    }
+
+    public void spark(){
+        if(Math.random()>.9999&&this.struck==-1){this.struck=5;}
     }
 
     public void manageTemperature(){
