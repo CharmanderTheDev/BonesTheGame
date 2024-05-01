@@ -6,7 +6,7 @@ public class World {
     static enum MoonPhase{CONCEPTION,BIRTH,GROWTH,TENURE,DEATH}
     static MoonPhase moonPhase = MoonPhase.GROWTH;
     static enum SunPhase{DEAD,SPARKING,GLOWING,BURNING,DYING}
-    static SunPhase sunPhase = SunPhase.DEAD;
+    static SunPhase sunPhase = SunPhase.SPARKING;
 
     static boolean dayTime = true;
 
@@ -17,7 +17,7 @@ public class World {
     public static final boolean printSunPhase = true;
     public static final boolean printMoonPhase = true;
     public static final boolean printTemperature = true;
-    public static final boolean printTotalTemp = false;
+    public static final boolean printTotalTemp = true;
     public static final boolean printTime = true;
     public static final boolean printAverageTemp = true;
 
@@ -82,7 +82,7 @@ public class World {
         age++;
         int totaltemp = 0;
 
-        phaseManager();
+        //phaseManager();
 
         for(int i=0;i<256;i++){
             for(int j=0;j<256;j++){
@@ -101,7 +101,7 @@ public class World {
         if(printMoonPhase){System.out.println("Moon phase: "+moonPhase);}
         if(printTotalTemp){System.out.println("Total temperature: "+totaltemp);}
         if(printTime){System.out.println(dayTime?"Daytime":"Nighttime");}
-        if(printAverageTemp){System.out.println("Average temperature: "+totaltemp/(256*256));}
+        if(printAverageTemp){System.out.println("Average temperature: "+totaltemp/(256.0*256.0));}
     }
 
     
@@ -153,7 +153,7 @@ public class World {
         for(int i=0;i<256;i++){
             for(int j=0;j<256;j++){
                 //Generating the ground
-                world[i][j] = new Dirt(fertilitynoise[i][j], heightnoise[i][j], 40, 10000, 0, 0, 0, new Coords(i,j));
+                world[i][j] = new Dirt(fertilitynoise[i][j], heightnoise[i][j], 0, 10000, 0, 0, 0, new Coords(i,j));
                 
                 //Adding the plants
                 if(new Random().nextBoolean()){((Dirt) world[i][j]).addPlant(new Creep(10, 0, new Coords(i,j)));}
