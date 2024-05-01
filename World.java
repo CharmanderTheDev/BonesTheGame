@@ -6,19 +6,20 @@ public class World {
     static enum MoonPhase{CONCEPTION,BIRTH,GROWTH,TENURE,DEATH}
     static MoonPhase moonPhase = MoonPhase.GROWTH;
     static enum SunPhase{DEAD,SPARKING,GLOWING,BURNING,DYING}
-    static SunPhase sunPhase = SunPhase.SPARKING;
+    static SunPhase sunPhase = SunPhase.DEAD;
 
     static boolean dayTime = true;
 
+    //DEBUGGING TOOLS
     public static final boolean printChaserCoords = false;
     public static final boolean printChaserFinds = false;
     public static final boolean printSight = false;
     public static final boolean printSunPhase = true;
     public static final boolean printMoonPhase = true;
     public static final boolean printTemperature = true;
-    public static final boolean printTotalTemp = true;
-    public static final boolean printTotalSun = true;
+    public static final boolean printTotalTemp = false;
     public static final boolean printTime = true;
+    public static final boolean printAverageTemp = true;
 
     public static int age;
 
@@ -80,7 +81,6 @@ public class World {
     public static void tick(){
         age++;
         int totaltemp = 0;
-        int totalsun = 0;
 
         phaseManager();
 
@@ -88,7 +88,6 @@ public class World {
             for(int j=0;j<256;j++){
                 world[i][j].tick();
                 totaltemp+=world[i][j].getTemperature();
-                totalsun+=world[i][j].getSunlight();
             }
         }
         
@@ -97,28 +96,52 @@ public class World {
                 world[i][j].clearFlagged();
             }
         }     
+
         if(printSunPhase){System.out.println("Sun phase: "+sunPhase);}
         if(printMoonPhase){System.out.println("Moon phase: "+moonPhase);}
         if(printTotalTemp){System.out.println("Total temperature: "+totaltemp);}
-        if(printTotalSun){System.out.println("Total sunlight: "+totalsun);}
         if(printTime){System.out.println(dayTime?"Daytime":"Nighttime");}
+        if(printAverageTemp){System.out.println("Average temperature: "+totaltemp/(256*256));}
     }
+
+    
 
     public static void phaseManager(){
         
         if(age%50==0){dayTime = !dayTime;}
 
-        if(age%100==0){
+        if(age%150==0){
             if(MoonPhase.values()[4]==moonPhase){moonPhase = MoonPhase.CONCEPTION;}
             else{
                 mainLoop:for(int i=0;i<4;i++){if(moonPhase==MoonPhase.values()[i]){moonPhase = MoonPhase.values()[i+1];break mainLoop;}}
             }}
 
-        if(age%350==0){
+        if(age%5000==0){
             if(SunPhase.values()[4]==sunPhase){sunPhase = SunPhase.DEAD;}
             else{
                 mainLoop:for(int i=0;i<4;i++){if(sunPhase==SunPhase.values()[i]){sunPhase = SunPhase.values()[i+1];break mainLoop;}}
             }}
+    }
+
+    public static double sin2(double a){
+        return(Math.sin(a)*Math.sin(a));
+    }
+
+    public static double getSunlight() {
+        return(
+            //Day/Night multiplier
+            sin2((Math.PI*age)/100) *
+            //Season multiplier
+            switch(sunPhase){
+                case BURNING -> .8;
+                case DEAD -> 0;
+                case DYING -> 2;
+                case GLOWING -> .4;
+                case SPARKING -> 0;
+                default -> 1;
+                
+            }
+        );
     }
 
     public static MoonPhase getMoonPhase(){return(moonPhase);}
@@ -130,7 +153,7 @@ public class World {
         for(int i=0;i<256;i++){
             for(int j=0;j<256;j++){
                 //Generating the ground
-                world[i][j] = new Dirt(fertilitynoise[i][j], heightnoise[i][j], 0,0,0,0,0,0,new Coords(i,j));
+                world[i][j] = new Dirt(fertilitynoise[i][j], heightnoise[i][j], 40, 10000, 0, 0, 0, new Coords(i,j));
                 
                 //Adding the plants
                 if(new Random().nextBoolean()){((Dirt) world[i][j]).addPlant(new Creep(10, 0, new Coords(i,j)));}

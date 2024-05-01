@@ -17,11 +17,11 @@ class Player extends Animal {
     public Player(int age, int sanity, int weight, int temperature, Coords coords){
         super(age, sanity, weight, temperature, coords);
         
-        this.rLeg = new BodyPart("right leg", 500, 0, 0, this); this.lLeg = new BodyPart("left leg", 500, 0, 0, this); 
-        this.rArm = new BodyPart("right arm", 0, 500, 0, this); this.lArm = new BodyPart("left arm", 0, 500, 0, this);
-        this.rLung = new BodyPart("right lung", 1000, 1000, 0, this); this.lLung = new BodyPart("left lung", 1000, 1000, 0, this);
-        this.heart = new BodyPart("heart", 1000, 1000, 1000, this); this.rEye = new BodyPart("right eye", 0, 0, 500, this);
-        this.lEye = new BodyPart("left eye", 0, 0, 500, this); this.head = new BodyPart("head", 0, 0, 1000, this);
+        this.rLeg = new BodyPart("right leg", 500, 0, 0, 16000, 1, this); this.lLeg = new BodyPart("left leg", 500, 0, 0, 16000, 1, this); 
+        this.rArm = new BodyPart("right arm", 0, 500, 0, 4000, 1, this); this.lArm = new BodyPart("left arm", 0, 500, 0, 4000, 1, this);
+        this.rLung = new BodyPart("right lung", 1000, 1000, 0, 1000, 0, this); this.lLung = new BodyPart("left lung", 1000, 1000, 0, 1000, 0, this);
+        this.heart = new BodyPart("heart", 1000, 1000, 1000, 400, 2, this); this.rEye = new BodyPart("right eye", 0, 0, 500, 5, 0, this);
+        this.lEye = new BodyPart("left eye", 0, 0, 500, 5, 0, this); this.head = new BodyPart("head", 0, 0, 1000, 4000, 2, this);
         
         this.bodyparts = new BodyPart[]
         {

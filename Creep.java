@@ -2,7 +2,7 @@ import java.awt.*;
 
 public class Creep extends Plant {
     
-    public Creep(int age, int temperature, Coords coords){
+    public Creep(int age, double temperature, Coords coords){
         super(age, 1, temperature, 1, 2, null, coords);
     }
 

@@ -4,8 +4,8 @@ public class Stone extends Ground{
     
     protected int fertility;
     
-    public Stone(int height, int temperature, int weight, int lifeForce, int warp, int vapors, int sunlight, Coords coords){
-        super(height, temperature, weight, lifeForce, warp, vapors, sunlight, coords);
+    public Stone(int height, int temperature, int weight, int lifeForce, int warp, int vapors, Coords coords){
+        super(height, temperature, weight, lifeForce, warp, vapors, coords);
     }
 
     public char drawChar(){return('\u2261');}

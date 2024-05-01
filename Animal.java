@@ -6,8 +6,8 @@ abstract class Animal implements Consumer, Edible, Moveable, Drawable {
         //Alive, Sapient, Physical, Moveable
         protected int age;
         protected int sanity;
-        protected int weight;
-        protected int temperature;
+        protected double weight;
+        protected double temperature;
         protected Coords coords;
 
         //Consumer
@@ -72,8 +72,8 @@ abstract class Animal implements Consumer, Edible, Moveable, Drawable {
      */
     public int getSanity(){return(this.sanity);}
 
-    public int getWeight(){return(this.weight);}
-    public int getTemperature(){return(this.temperature);}
+    public double getWeight(){return(this.weight);}
+    public double getTemperature(){return(this.temperature);}
     
     public int[] getConsumedNutrients(){return(new int[] {this.consumedCarbs,this.consumedFungi,this.consumedRoots,this.consumedFat,this.consumedMeat});}
     

@@ -2,15 +2,15 @@ abstract class Plant implements Alive, Drawable {
     
     public static int plantCount;
     protected int age;
-    protected int weight;
-    protected int temperature;
+    protected double weight;
+    protected double temperature;
     protected int fertility;
     protected int germination;
     protected Drug drug;
     protected Coords coords;
 
 
-    public Plant(int age, int weight, int temperature, int fertility, int germination, Drug drug, Coords coords){
+    public Plant(int age, double weight, double temperature, int fertility, int germination, Drug drug, Coords coords){
         plantCount++;
         this.age = age;
         this.weight = weight;
@@ -22,8 +22,8 @@ abstract class Plant implements Alive, Drawable {
     }
 
     public int getAge(){return(this.age);}
-    public int getWeight(){return(this.weight);}
-    public int getTemperature(){return(this.temperature);}
+    public double getWeight(){return(this.weight);}
+    public double getTemperature(){return(this.temperature);}
     public int getFertility(){return(this.fertility);}
 
     public void transfer(){}

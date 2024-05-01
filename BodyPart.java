@@ -10,21 +10,25 @@ class BodyPart implements Solid{
         private ArrayList<Effect> effects;
 
     //Variables mandated by interfaces
-        private int temperature;
-        private int weight;
+        private double weight;
         private int integrity;
         private ArrayList<Liquid> soakedIn;
+
+    //Subparts 
+        
 
     /**
      * the animal to which this BodyPart belongs.
      */
     private Animal animal;
 
-    public BodyPart(String name, int moveSpeed, int strength, int perception, Animal animal){
+    public BodyPart(String name, int moveSpeed, int strength, int perception, double weight, int integrity, Animal animal){
         this.name = name;
         this.moveSpeed = moveSpeed;
         this.strength = strength;
         this.perception = perception;
+        this.weight = weight;
+        this.integrity = integrity;
         this.effects = new ArrayList<Effect>();
         this.animal = animal;
     }
@@ -85,8 +89,8 @@ class BodyPart implements Solid{
     //TODO: implement tick
     public void tick(){}
 
-    public int getTemperature(){return(this.temperature);}
-    public int getWeight(){return(this.weight);}
+    public double getTemperature(){return(this.animal.getTemperature());}
+    public double getWeight(){return(this.weight);}
     public ArrayList<Liquid> getSoakedIn(){return(this.soakedIn);}
     public int getIntegrity(){return(this.integrity);}
 

@@ -9,8 +9,8 @@ public class Dirt extends Ground implements Growable {
     protected ArrayList<Plant> plantMarkedForRemoval;
     protected ArrayList<Plant> plantMarkedForAddition;
     
-    public Dirt(int fertility, int height, int temperature, int weight, int lifeForce, int warp, int vapors, int sunlight, Coords coords){
-        super(height, temperature, weight, lifeForce, warp, vapors, sunlight, coords);
+    public Dirt(int fertility, int height, int temperature, int weight, int lifeForce, int warp, int vapors, Coords coords){
+        super(height, temperature, weight, lifeForce, warp, vapors, coords);
         this.fertility = fertility;
         this.foliage = new ArrayList<Plant>();
         this.plantMarkedForRemoval = new ArrayList<Plant>();

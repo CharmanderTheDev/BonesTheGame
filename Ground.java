@@ -5,13 +5,12 @@ abstract class Ground implements Physical, Drawable {
     protected int struck;
 
     protected int height;
-    protected int temperature;
-    protected int weight;
+    protected double temperature;
+    protected double weight;
     
-    protected int lifeForce;
-    protected int warp;
-    protected int vapors;
-    protected int sunlight;
+    protected double lifeForce;
+    protected double warp;
+    protected double vapors;
 
     protected ArrayList<Physical> population;
     protected ArrayList<Physical> markedForRemoval;
@@ -19,14 +18,13 @@ abstract class Ground implements Physical, Drawable {
 
     protected Coords coords;
 
-    public Ground(int height, int temperature, int weight, int lifeForce, int warp, int vapors, int sunlight, Coords coords) { 
+    public Ground(int height, double temperature, double weight, double lifeForce, double warp, double vapors, Coords coords) { 
         this.height = height;
         this.temperature = temperature;
         this.weight = weight;
         this.lifeForce = lifeForce;
         this.warp = warp;
         this.vapors = vapors;
-        this.sunlight = sunlight;
 
         this.population = new ArrayList<Physical>();
         this.markedForRemoval = new ArrayList<Physical>();
@@ -39,25 +37,22 @@ abstract class Ground implements Physical, Drawable {
     public int getHeight(){return(this.height);}
     public void setHeight(int height){this.height = height;}
 
-    public int getTemperature(){return(this.temperature);}
+    public double getTemperature(){return(this.temperature);}
     public void setTemperature(int temperature){this.temperature = temperature;}
-    public void addTemperature(int temperature){this.temperature += temperature;}
+    public void addTemperature(double temperature){this.temperature += temperature;}
 
-    public int getWeight(){return(this.weight);}
-    public void setWeight(int weight){this.weight = weight;}
+    public double getWeight(){return(this.weight);}
+    public void setWeight(double weight){this.weight = weight;}
 
 
-    public int getLifeForce(){return(this.lifeForce);}
-    public void setLifeForce(int lifeForce){this.lifeForce = lifeForce;}
+    public double getLifeForce(){return(this.lifeForce);}
+    public void setLifeForce(double lifeForce){this.lifeForce = lifeForce;}
 
-    public int getWarp(){return(this.warp);}
-    public void setWarp(int warp){this.warp = warp;}
+    public double getWarp(){return(this.warp);}
+    public void setWarp(double warp){this.warp = warp;}
 
-    public int getVapors(){return(this.vapors);}
-    public void setVapors(int vapors){this.vapors = vapors;}
-
-    public int getSunlight(){return(this.sunlight);}
-    public void setSunlight(int sunlight){this.sunlight = sunlight;}
+    public double getVapors(){return(this.vapors);}
+    public void setVapors(double vapors){this.vapors = vapors;}
     
     public Coords getCoords(){return(this.coords);}
 
@@ -122,26 +117,16 @@ abstract class Ground implements Physical, Drawable {
         }
     }
 
-    public void manageSunlight(){
-        if(World.dayTime){
-        if(World.getSunPhase()==World.SunPhase.DEAD){this.sunlight = 0;}
-        else if(World.getSunPhase()==World.SunPhase.SPARKING){this.spark();this.sunlight=0;}
-        else if(World.getSunPhase()==World.SunPhase.GLOWING){this.sunlight = (int) (Math.random()*40)+40;}
-        else if(World.getSunPhase()==World.SunPhase.BURNING){this.sunlight = (int) (Math.random()*80)+80;}
-        else{this.sunlight = (int) (Math.random()*20)+20;}
-        }else{this.sunlight=0;}
-    }
-
     public void spark(){
         if(Math.random()>.9999&&this.struck==-1){this.struck=5;}
     }
 
     public void manageTemperature(){
         //Sunlight temp manager
-        this.temperature+=this.sunlight;
+        this.temperature += World.getSunlight() * 3;
 
-        //removes 1% of heat in this block
-        this.temperature = (this.temperature * 99) / (100*((this.temperature/100)+1));
+        //Dispersion
+        this.temperature -= .001 * (Math.pow(this.temperature-World.getSunlight(), 2));
 
         //disperses a further 10% outward
         int total = 0;
@@ -158,7 +143,6 @@ abstract class Ground implements Physical, Drawable {
     }
 
     public void tick(){
-        this.manageSunlight();
         this.manageTemperature();
         this.combineLiquids();
         //Ticking objects

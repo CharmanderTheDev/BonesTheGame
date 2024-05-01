@@ -71,12 +71,12 @@ interface Physical extends Part{
     /**
      * @return the temperature of the object
      */
-    public int getTemperature();
+    public double getTemperature();
 
     /**
      * @return the weight of the object
      */
-    public int getWeight();
+    public double getWeight();
 
     /**
      * @param perception a combination of range and the actual perception stat of the entity attempting to view the object
@@ -97,7 +97,14 @@ interface Solid extends Physical{
     public ArrayList<Liquid> getSoakedIn();
 
     /**
-     * @return the structural integrity of the solid object, if applicable
+     * @return the structural integrity of the solid object, if applicable.
+     * 0: completely soft, jello, slime.
+     * 1: soft tissue, has some integrity, flesh, fruit.
+     * 2: hard tissue, leather.
+     * 3: soft hards, wood.
+     * 4: hard hards, stone.
+     * 5: very hard hards, metal.
+     * -1: unbreakable.
      */
     public int getIntegrity();
 }

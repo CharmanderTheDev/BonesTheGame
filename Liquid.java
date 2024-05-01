@@ -1,12 +1,12 @@
 public abstract class Liquid implements Physical, Drawable {
     
     public int amount;
-    public int temperature;
-    public int weight;
+    public double temperature;
+    public double weight;
     public Coords coords;
     public Physical container;
 
-    public Liquid(int temperature, int weight, int amount, Coords coords, Physical container){
+    public Liquid(double temperature, double weight, int amount, Coords coords, Physical container){
         this.temperature = temperature;
         this.weight = weight;
         this.amount = amount;
@@ -34,11 +34,11 @@ public abstract class Liquid implements Physical, Drawable {
         return(new String[] {});
     }
 
-    public int getTemperature(){
+    public double getTemperature(){
         return(this.temperature);
     }
 
-    public int getWeight(){
+    public double getWeight(){
         return(this.weight);
     }
 
