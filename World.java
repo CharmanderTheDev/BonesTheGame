@@ -6,9 +6,9 @@ public class World {
     static enum MoonPhase{CONCEPTION,BIRTH,GROWTH,TENURE,DEATH}
     static MoonPhase moonPhase = MoonPhase.GROWTH;
     static enum SunPhase{DEAD,SPARKING,GLOWING,BURNING,DYING}
-    static SunPhase sunPhase = SunPhase.SPARKING;
+    static SunPhase sunPhase = SunPhase.DYING;
 
-    static boolean dayTime = true;
+    static boolean dayTime = false;
 
     //DEBUGGING TOOLS
     public static final boolean printChaserCoords = false;
@@ -82,7 +82,7 @@ public class World {
         age++;
         int totaltemp = 0;
 
-        //phaseManager();
+        phaseManager();
 
         for(int i=0;i<256;i++){
             for(int j=0;j<256;j++){
@@ -116,7 +116,7 @@ public class World {
                 mainLoop:for(int i=0;i<4;i++){if(moonPhase==MoonPhase.values()[i]){moonPhase = MoonPhase.values()[i+1];break mainLoop;}}
             }}
 
-        if(age%5000==0){
+        if(age%500==0){
             if(SunPhase.values()[4]==sunPhase){sunPhase = SunPhase.DEAD;}
             else{
                 mainLoop:for(int i=0;i<4;i++){if(sunPhase==SunPhase.values()[i]){sunPhase = SunPhase.values()[i+1];break mainLoop;}}
@@ -135,7 +135,7 @@ public class World {
             switch(sunPhase){
                 case BURNING -> .8;
                 case DEAD -> 0;
-                case DYING -> 2;
+                case DYING -> 1.6;
                 case GLOWING -> .4;
                 case SPARKING -> 0;
                 default -> 1;

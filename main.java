@@ -21,7 +21,7 @@ class Main {
                 }
             }
             //moving
-            waitOne(player);
+            //waitOne(player);
             World.tick();
 
         }
