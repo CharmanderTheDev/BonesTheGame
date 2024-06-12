@@ -126,7 +126,11 @@ abstract class Ground implements Physical, Drawable {
         this.temperature += World.getSunlight() * 3;
 
         //Dispersion
-        this.temperature -= .001 * (Math.pow(this.temperature-World.getSunlight(), 2));
+        if(World.sunPhase!=World.SunPhase.SPARKING){this.temperature -= Helper.reduce((int)(this.temperature-(World.getSunlight()*100))) * .001 * (Math.pow(this.temperature-(World.getSunlight()*100), 2));}
+        else{this.temperature -= .02 * (this.temperature);}
+
+        //Sparks
+        if(World.getSunPhase()==World.SunPhase.SPARKING&&World.dayTime==true){this.spark();}
 
         //disperses a further 10% outward
         int total = 0;
