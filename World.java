@@ -6,7 +6,7 @@ public class World {
     static enum MoonPhase{CONCEPTION,BIRTH,GROWTH,TENURE,DEATH}
     static MoonPhase moonPhase = MoonPhase.GROWTH;
     static enum SunPhase{DEAD,SPARKING,GLOWING,BURNING,DYING}
-    static SunPhase sunPhase = SunPhase.SPARKING;
+    static SunPhase sunPhase = SunPhase.BURNING;
 
     static boolean dayTime = true;
 
@@ -130,7 +130,7 @@ public class World {
     public static double getSunlight() {
         return(
             //Day/Night multiplier
-            sin2((Math.PI*age)/100) *
+            sin2((Math.PI*age)/1000) *
             //Season multiplier
             switch(sunPhase){
                 case BURNING -> .8;
